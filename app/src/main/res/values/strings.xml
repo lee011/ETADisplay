@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">到站時間查閱</string>
+    <string name="title_home">主頁</string>
+    <string name="title_dashboard">路線</string>
+    <string name="title_notifications">巴士站</string>
+    <string name="label_welcome">歡迎！</string>
+    <string name="label_search_route_hint">輸入搜尋路線</string>
+    <string name="label_settings">設定</string>
+</resources>
