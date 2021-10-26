@@ -1,0 +1,51 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        app:title="一般選項">
+
+    <SwitchPreferenceCompat
+        app:defaultValue="false"
+        app:key="use_location"
+        app:summary="若啟用定位服務，即可透過定位服務取得巴士站的距離，並指示最接近的巴士站。"
+        app:title="使用定位服務" />
+
+    <ListPreference
+        app:defaultValue="full_time"
+        app:key="time_display_style"
+        app:title="到站時間顯示方式"
+        app:entries="@array/time_display_style_entries"
+        app:entryValues="@array/time_display_style_values"
+        app:useSimpleSummaryProvider="true"/>
+
+    <Preference
+        app:key="tts_settings"
+        app:title="文字轉換語音選項"
+        app:summary="本應用程式使用文字轉換語音技術，以語音方式播報下班巴士到站時間。"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="資料更新">
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:key="data_auto_update"
+            app:title="資料自動更新"
+            app:summary="開啟後，應用程式會在每次啟動時檢查資料，如距離上次更新時間超過 24 小時，將自動進行資料更新。" />
+
+        <Preference
+            app:key="update_stops_data"
+            app:title="更新巴士站資料"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="關於此應用程式">
+        <Preference
+            app:enabled="false"
+            app:key="version"
+            app:title="版本"
+            />
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,18 @@
+<resources>
+    <string-array name="time_display_style_entries">
+        <item>完整時間（如：13:33）</item>
+        <item>分鐘數（如：30 分鐘）</item>
+    </string-array>
+
+    <string-array name="time_display_style_values">
+        <item>full_time</item>
+        <item>minutes</item>
+    </string-array>
+
+    <string-array name="route_eta_options">
+        <item>讀出到站時間</item>
+        <item>把此站新增至收藏</item>
+        <item>檢視巴士站位置</item>
+        <item>檢視巴士站街景</item>
+    </string-array>
+</resources>

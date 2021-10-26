@@ -7,4 +7,22 @@
     <string name="label_search_route_hint">輸入搜尋路線</string>
     <string name="label_settings">設定</string>
     <string name="label_to">往</string>
+    <string name="title_activity_settings">設定</string>
+    <string name="label_refresh">重新整理</string>
+    <string name="location_updated">已更新位置：%1$s</string>
+    <string name="label_stop_name">輸入巴士站名稱</string>
+    <string name="loading_route_data">正在載入路線資料……</string>
+    <string name="loading_route_stop_data">正在載入路線巴士站資料……</string>
+    <string name="loading_stop_eta_data">正在載入巴士站及到站時間資料……</string>
+    <string name="loading_stop_eta_data_f">正在載入巴士站及到站時間資料 (%d/%d)……</string>
+    <string name="loading_data">正在載入資料</string>
+    <string name="loading_eta_data">正在載入到站時間資料……</string>
+    <string name="loading_eta_data_f">正在載入到站時間資料 (%d/%d)……</string>
+    <string name="ok">確定</string>
+    <string name="error">錯誤</string>
+    <string name="stop_not_loaded">尚未載入此巴士站的資料。請在應用程式設定中進行資料更新。</string>
+    <string name="label_co_kmb">九巴/龍運</string>
+    <string name="label_co_ctb">城巴</string>
+    <string name="label_co_nwfb">新巴</string>
+    <string name="cd_company">Company</string>
 </resources>

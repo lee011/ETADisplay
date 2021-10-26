@@ -2,19 +2,19 @@ package hk.kllstudio.eta;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -22,8 +22,8 @@ import java.util.concurrent.Executors;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import hk.kllstudio.eta.apiget.Request;
-import hk.kllstudio.eta.apiget.responses.Stop;
+import hk.kllstudio.eta.apiget.kmb.Request;
+import hk.kllstudio.eta.apiget.kmb.responses.Stop;
 
 public class MyApplication extends Application {
     private MutableLiveData<List<Stop>> stops;
@@ -59,7 +59,7 @@ public class MyApplication extends Application {
                 Type returnType = new TypeToken<List<Stop>>() {
                 }.getType();
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").create();
-                stops.setValue(gson.<List<Stop>>fromJson(sb.toString(), returnType));
+                stops.setValue(gson.fromJson(sb.toString(), returnType));
             } catch (FileNotFoundException ex) {
                 // 2. Fetch stops online as stops file does not exist
                 downloadStops();
@@ -70,23 +70,30 @@ public class MyApplication extends Application {
         }
     }
 
+    public void updateStops() {
+        if (checkIsStopExpired()) {
+            downloadStops();
+        }
+    }
+
+    public boolean checkIsStopExpired() {
+        File file = getFileStreamPath("stops.json");
+        return new Date().getTime() - file.lastModified() > 86400000L;
+    }
+
     public void downloadStops() {
         final Executor executor = Executors.newSingleThreadExecutor();
-        final Handler handler = new Handler(Looper.getMainLooper());
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    List<Stop> list = Request.getStop().getData();
-                    stops.postValue(list);
-                    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").create();
-                    String json = gson.toJson(list);
-                    FileOutputStream stream = openFileOutput("stops.json", Context.MODE_PRIVATE);
-                    stream.write(json.getBytes());
-                    stream.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        executor.execute(() -> {
+            try {
+                List<Stop> list = Request.getStop().getData();
+                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").create();
+                String json = gson.toJson(list);
+                FileOutputStream stream = openFileOutput("stops.json", Context.MODE_PRIVATE);
+                stream.write(json.getBytes());
+                stream.close();
+                stops.postValue(list);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }

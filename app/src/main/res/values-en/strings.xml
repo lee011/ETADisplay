@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ETA Check</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Route</string>
+    <string name="title_notifications">Stop</string>
+    <string name="label_welcome">Welcome!</string>
+    <string name="label_search_route_hint">Enter search route</string>
+    <string name="label_settings">Settings</string>
+    <string name="label_to">to</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="label_refresh">Refresh</string>
+    <string name="location_updated">Location updated: %1$s</string>
+    <string name="label_stop_name">Enter stop name</string>
+    <string name="loading_route_data">Loading route data...</string>
+    <string name="loading_route_stop_data">Loading route stop data...</string>
+    <string name="error">Error</string>
+    <string name="loading_data">Loading data</string>
+    <string name="loading_eta_data">Loading ETA data...</string>
+    <string name="loading_eta_data_f">Loading ETA data (%d/%d)...</string>
+    <string name="loading_stop_eta_data">Loading stop and ETA data...</string>
+    <string name="loading_stop_eta_data_f">Loading stop and ETA data (%d/%d)...</string>
+    <string name="ok">OK</string>
+    <string name="stop_not_loaded">Data of this stop is not loaded. Please update data in settings.</string>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="time_display_style_entries">
+        <item>Full time (13:33)</item>
+        <item>Minutes (30 min)</item>
+    </string-array>
+
+    <string-array name="route_eta_options">
+        <item>Read ETA</item>
+        <item>Add to bookmarks</item>
+        <item>View stop location</item>
+        <item>View stop street view</item>
+    </string-array>
+</resources>

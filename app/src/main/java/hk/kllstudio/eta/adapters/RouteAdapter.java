@@ -1,10 +1,12 @@
 package hk.kllstudio.eta.adapters;
 
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -13,11 +15,11 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import hk.kllstudio.eta.R;
-import hk.kllstudio.eta.apiget.responses.Route;
+import hk.kllstudio.eta.apiget.IRoute;
 
 public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.ViewHolder> implements View.OnClickListener, Filterable {
-    private final List<Route> routes;
-    private final List<Route> filtered;
+    private final List<IRoute> routes;
+    private final List<IRoute> filtered;
     private OnItemClickListener mOnItemClickListener = null;
 
     @Override
@@ -26,7 +28,7 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.ViewHolder> 
     }
 
     public interface Predicate {
-        boolean apply(Route item);
+        boolean apply(IRoute item);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -40,10 +42,10 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.ViewHolder> 
 
     public RouteAdapter() {
         routes = new ArrayList<>();
-        filtered=new ArrayList<>();
+        filtered = new ArrayList<>();
     }
 
-    public RouteAdapter(List<Route> routes) {
+    public RouteAdapter(List<IRoute> routes) {
         this.routes = routes;
         filtered = new ArrayList<>();
     }
@@ -65,10 +67,22 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull RouteAdapter.ViewHolder holder, int position) {
-        Route route = filtered.get(position);
+        IRoute route = filtered.get(position);
         holder.destTextView.setText(route.getDestTc());
         holder.originTextView.setText(route.getOrigTc());
         holder.routeNumberTextView.setText(route.getRoute());
+        GradientDrawable imageViewDrawable = (GradientDrawable) holder.imageView.getDrawable();
+        switch (route.getCo()) {
+            case "KMB":
+                imageViewDrawable.setColor(0xFFFF0000);
+                break;
+            case "CTB":
+                imageViewDrawable.setColor(0xFFF4E010);
+                break;
+            case "NWFB":
+                imageViewDrawable.setColor(0xFFFF7F27);
+                break;
+        }
         holder.itemView.setTag(position);
     }
 
@@ -79,7 +93,7 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.ViewHolder> 
 
     public void filter(Predicate predicate) {
         filtered.clear();
-        for (Route route : routes) {
+        for (IRoute route : routes) {
             if (predicate.apply(route)) {
                 filtered.add(route);
                 if (filtered.size() >= 100) break;
@@ -88,18 +102,20 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
 
-    public Route get(int position) {
+    public IRoute get(int position) {
         return filtered.get(position);
     }
 
     public class ViewHolder extends ItemBaseViewHolder {
         public TextView routeNumberTextView, originTextView, destTextView;
+        ImageView imageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            routeNumberTextView=itemView.findViewById(R.id.routeNumberTextView);
-            originTextView=itemView.findViewById(R.id.originTextView);
-            destTextView=itemView.findViewById(R.id.destTextView);
+            routeNumberTextView = itemView.findViewById(R.id.routeNumberTextView);
+            originTextView = itemView.findViewById(R.id.originTextView);
+            destTextView = itemView.findViewById(R.id.destTextView);
+            imageView = itemView.findViewById(R.id.imageView);
         }
     }
 }

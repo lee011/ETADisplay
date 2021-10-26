@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="hk.kllstudio.eta.ui.dashboard.DashboardFragment"
+        android:name="hk.kllstudio.eta.ui.routes.RouteFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_route" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="hk.kllstudio.eta.ui.notifications.NotificationsFragment"
+        android:name="hk.kllstudio.eta.ui.stops.StopFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_stop" />
 </navigation>
