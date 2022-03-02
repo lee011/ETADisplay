@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -31,6 +32,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import hk.kllstudio.eta.EtaActivity;
 import hk.kllstudio.eta.R;
+import hk.kllstudio.eta.TranferAssistantActivity;
 import hk.kllstudio.eta.adapters.RouteAdapter;
 import hk.kllstudio.eta.apiget.IRoute;
 import hk.kllstudio.eta.apiget.kmb.Request;
@@ -49,6 +51,7 @@ public class RouteFragment extends Fragment {
         final ChipGroup chipGroup = root.findViewById(R.id.coFilterChip);
         final Chip[] chips = new Chip[]{root.findViewById(R.id.filter_co_kmb),
                 root.findViewById(R.id.filter_co_ctb), root.findViewById(R.id.filter_co_nwfb)};
+        ExtendedFloatingActionButton efab = root.findViewById(R.id.button_transfer_assist);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         textInputLayout.setHelperText("正在載入路線...");
@@ -161,6 +164,9 @@ public class RouteFragment extends Fragment {
                     });
                 }
             });
+        efab.setOnClickListener(v -> {
+            startActivity(new Intent(getContext(), TranferAssistantActivity.class));
+        });
         return root;
     }
 }

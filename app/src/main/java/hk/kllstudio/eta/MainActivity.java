@@ -18,6 +18,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.preference.PreferenceManager;
 
 public class MainActivity extends AppCompatActivity {
+    NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +33,15 @@ public class MainActivity extends AppCompatActivity {
             application.updateStops();
         }
         application.fetchStopInfo();
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        BottomNavigationView navView;
+        navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
     }
@@ -56,5 +59,13 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (navController.getCurrentBackStackEntry().getDestination().getId() == R.id.navigation_home)
+            finish();
+        else
+            super.onBackPressed();
     }
 }

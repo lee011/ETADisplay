@@ -103,7 +103,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="?attr/background"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="路線到站時間" />
 

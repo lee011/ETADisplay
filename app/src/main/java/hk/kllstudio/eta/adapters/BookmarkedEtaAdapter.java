@@ -127,6 +127,7 @@ public class BookmarkedEtaAdapter extends RecyclerView.Adapter<BookmarkedEtaAdap
                     stringBuilder.append(String.format(" %s", filteredETA.get(i).getRemarkTc()));
                 }
                 holder.etaTextView[i].setText(stringBuilder.toString());
+                holder.etaTextView[i].setSelected(true);
                 holder.etaTextView[i].setVisibility(View.VISIBLE);
             } else {
                 holder.etaTextView[i].setText(filteredETA.get(i).getRemarkTc());

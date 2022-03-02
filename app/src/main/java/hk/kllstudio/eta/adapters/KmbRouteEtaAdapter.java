@@ -81,7 +81,7 @@ public class KmbRouteEtaAdapter extends RouteEtaAdapter {
                     if (minutes < 0) {
                         stringBuilder.append("已到達/已開出");
                     } else if (minutes < 1) {
-                        stringBuilder.append("即將到達");
+                        stringBuilder.append(routeStop.getSeq() == 1 ? "即將開出" : "即將到達");
                     } else {
                         stringBuilder.append(String.format("%d 分鐘", minutes));
                     }
@@ -90,6 +90,7 @@ public class KmbRouteEtaAdapter extends RouteEtaAdapter {
                     stringBuilder.append(String.format(" %s", filteredETA.get(i).getRemarkTc()));
                 }
                 holder.etaTextView[i].setText(stringBuilder.toString());
+                holder.etaTextView[i].setSelected(true);
                 holder.etaTextView[i].setVisibility(View.VISIBLE);
             } else {
                 holder.etaTextView[i].setText(filteredETA.get(i).getRemarkTc());
